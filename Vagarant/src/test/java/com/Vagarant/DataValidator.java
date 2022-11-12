@@ -7,14 +7,14 @@ import net.minidev.json.JSONArray;
 import net.minidev.json.JSONObject;
 
 public class DataValidator {
-	
-	
+
+
 	public void validateTestCases()
 	{
 		JSONObject itemsJson = new JSONObject();
 		int foreignCount = 0;
 		int indianCount = 0;
-		
+
 		JSONParser jsonParser = new JSONParser();
 
 		try (FileReader reader = new FileReader("data.json"))
@@ -23,9 +23,9 @@ public class DataValidator {
 			Object obj = jsonParser.parse(reader);
 			JSONObject jo = (JSONObject) obj;
 			JSONArray playersArray =  (JSONArray) jo.get("player");
-			
+
 			int sizeOfItems = playersArray.size();
-			
+
 			if (sizeOfItems>0)
 			{
 				for(int i = 0; i < sizeOfItems; i++)
@@ -38,9 +38,9 @@ public class DataValidator {
 					{
 						System.out.println("Wicket Keeper was found in the team: "+playername);
 					}
-					
+
 					String country = itemsJson.get("country").toString();
-					
+
 					if(country.equalsIgnoreCase("India"))
 					{
 						indianCount+=1;
@@ -48,7 +48,7 @@ public class DataValidator {
 					else
 					{
 						foreignCount+=1;
-						
+
 					}
 				}
 				if(foreignCount>4)
@@ -60,18 +60,17 @@ public class DataValidator {
 					System.out.println("There are only "+foreignCount+" foreign players in the team");
 				}
 			}
-			
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
+
 	}
-	
-	
+
 	public static void main(String[] args) throws IOException {
 		DataValidator dv = new DataValidator();
 		dv.validateTestCases();
-		
+
 	}
 
 }
